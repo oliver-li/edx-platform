@@ -11,6 +11,7 @@ MEDIA_ROOT = "/edx/var/edxapp/uploads"
 DEBUG = True
 USE_I18N = True
 TEMPLATE_DEBUG = DEBUG
+USE_ASSET_PIPELINE = not DEBUG
 
 ################################ LOGGERS ######################################
 
@@ -32,8 +33,12 @@ FEATURES['PREVIEW_LMS_BASE'] = "preview." + LMS_BASE
 
 ########################### PIPELINE #################################
 
-# Skip RequireJS optimizer in development
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+if USE_ASSET_PIPELINE:
+    PIPELINE = True
+    PIPELINE_STORAGE = 'pipeline.storage.PipelineFinderStorage'
+
 
 ############################# ADVANCED COMPONENTS #############################
 
@@ -68,7 +73,7 @@ DEBUG_TOOLBAR_CONFIG = {
 
 
 def should_show_debug_toolbar(_):
-    return True  # We always want the toolbar on devstack regardless of IP, auth, etc.
+    return DEBUG  # We always want the toolbar on devstack regardless of IP, auth, etc.
 
 
 # To see stacktraces for MongoDB queries, set this to True.
