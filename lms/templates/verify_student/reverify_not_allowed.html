@@ -7,18 +7,22 @@
 <%block name="pagetitle">${_("Re-Verification")}</%block>
 
 <%block name="content">
-<div id="reverify-blocked" class="container">
-    <section class="outside-app">
-        % if status == "pending":
-        <p>${_("You have already submitted a verification attempt, so you don't need to reverify.")}</p>
-        % elif status == "approved":
-        <p>${_("You have verification attempt has already been approved, so you don't need to reverify.")}</p>
-        % else:
-        <p>${_("You cannot reverify at this time.")}</p>
-        % endif
+<div class="reverify-blocked">
+    <h1 class="title">${_("Reverification")}</h1>
 
-        <p><a class="action action-primary" href="${ reverse("dashboard") }">${_("Return to Your Dashboard")}</a></p>
-    </section>
+    <div class="instructions">
+        <p>
+            % if status in ["pending", "approved"]:
+                ${_("You have already submitted a verification attempt, so you don't need to reverify.")}
+            % else:
+                ${_("You cannot reverify at this time.")}
+            % endif
+        </p>
+    </div>
+
+    <div class="wrapper-actions">
+        <a class="action action-primary" href="${ reverse('dashboard') }">${_("Return to Your Dashboard")}</a>
+    </div>
 </div>
 
 </%block>
