@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 
 from rest_framework import serializers
 
+from discussion_api.permissions import get_comment_editable_fields, get_thread_editable_fields
 from django_comment_common.models import (
     FORUM_ROLE_ADMINISTRATOR,
     FORUM_ROLE_COMMUNITY_TA,
@@ -68,6 +69,7 @@ class _ContentSerializer(serializers.Serializer):
     abuse_flagged = serializers.SerializerMethodField("get_abuse_flagged")
     voted = serializers.SerializerMethodField("get_voted")
     vote_count = serializers.SerializerMethodField("get_vote_count")
+    editable_fields = serializers.SerializerMethodField("get_editable_fields")
 
     non_updatable_fields = ()
 
@@ -212,6 +214,10 @@ class ThreadSerializer(_ContentSerializer):
         """Returns the URL to retrieve the thread's non-endorsed comments."""
         return self.get_comment_list_url(obj, endorsed=False)
 
+    def get_editable_fields(self, obj):
+        """Return the list of the fields the requester can edit"""
+        return sorted(get_thread_editable_fields(obj, self.context))
+
     def restore_object(self, attrs, instance=None):
         if instance:
             for key, val in attrs.items():
@@ -277,6 +283,10 @@ class CommentSerializer(_ContentSerializer):
             CommentSerializer(child, context=self.context).data
             for child in obj.get("children", [])
         ]
+
+    def get_editable_fields(self, obj):
+        """Return the list of the fields the requester can edit"""
+        return sorted(get_comment_editable_fields(obj, self.context))
 
     def validate(self, attrs):
         """
