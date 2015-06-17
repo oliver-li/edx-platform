@@ -1,8 +1,8 @@
 <div id="wrapper-reverify-success" tab-index="0" class="wrapper-view reverify-success-step">
-    <h1 class="title"><%- gettext( "Your Credentials Have Been Updated" ) %></h3>
+    <h1 class="title"><%- gettext( "Identity Verification In Progress" ) %></h3>
 
     <div class="instruction">
-        <p><%- gettext( "We've captured your re-submitted information and will review it to verify your identity shortly. You should receive an update to your veriication status within 1-2 days. In the meantime, you still have access to all of your course content." ) %></p>
+        <p><%- gettext( "We have received your information and are verifying your identity. You will see a message on your dashboard when the verification process is complete (usually within 1-2 days). In the meantime, you can still access all available course content." ) %></p>
     </div>
 
     <div class="wrapper-actions">

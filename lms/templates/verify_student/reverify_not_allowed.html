@@ -4,18 +4,18 @@
 %>
 
 <%inherit file="../main.html" />
-<%block name="pagetitle">${_("Re-Verification")}</%block>
+<%block name="pagetitle">${_("Identity Verification")}</%block>
 
 <%block name="content">
 <div class="reverify-blocked">
-    <h1 class="title">${_("Reverification")}</h1>
+    <h1 class="title">${_("Identity Verification")}</h1>
 
     <div class="instructions">
         <p>
             % if status in ["pending", "approved"]:
-                ${_("You have already submitted a verification attempt, so you don't need to reverify.")}
+                ${_("You have already submitted your verification information. You will see a message on your dashboard when the verification process is complete (usually within 1-2 days).")}
             % else:
-                ${_("You cannot reverify at this time.")}
+                ${_("You cannot verify your identity at this time.")}
             % endif
         </p>
     </div>
