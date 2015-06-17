@@ -1067,8 +1067,10 @@ def _progress(request, course_key, student_id):
             'eligibility_status': eligibility_status,
             'requirements': requirement_statuses
         }
+        is_course_credit = True
     else:
         credit_course = None
+        is_course_credit = False
 
     context = {
         'course': course,
@@ -1079,7 +1081,8 @@ def _progress(request, course_key, student_id):
         'student': student,
         'passed': is_course_passed(course, grade_summary),
         'show_generate_cert_btn': show_generate_cert_btn,
-        'credit_course': credit_course
+        'credit_course': credit_course,
+        'is_credit_course': is_course_credit
     }
 
     if show_generate_cert_btn:
