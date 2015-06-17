@@ -1859,7 +1859,6 @@ INSTALLED_APPS = (
     'lms.djangoapps.lms_xblock',
 
     'openedx.core.djangoapps.content.course_structures',
-    'course_structure_api',
 
     # Mailchimp Syncing
     'mailing',
